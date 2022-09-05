@@ -1,0 +1,74 @@
+
+{ 
+    "workbench.iconTheme": "material-icon-theme", 
+    "prettier.jsxBracketSameLine": false,
+    "prettier.jsxSingleQuote": true, 
+    "prettier.printWidth": 70, 
+    "prettier.singleQuote": true, 
+    "prettier.trailingComma": "all", 
+    "liveServer.settings.donotShowInfoMsg": true, 
+    "[javascript, typescript]": { 
+      "editor.defaultFormatter": "esbenp.prettier-vscode" 
+    }, 
+    "editor.formatOnSave": true, 
+    "javascript.updateImportsOnFileMove.enabled": "always", 
+    "editor.codeActionsOnSave": {
+
+       
+      "source.fixAll": true, 
+      "source.sortImports": true, 
+      "source.organizeImports": false 
+    }, 
+    "diffEditor.ignoreTrimWhitespace": false, 
+    "git.confirmSync": false, 
+    "git.autofetch": true, 
+    "editor.mouseWheelZoom": true, 
+    "cSpell.userWords": [ 
+      "ellipsize", 
+      "Geofence", 
+      "geofences", 
+      "Geopoint", 
+      "geopoints", 
+      "instalert", 
+      "passcode", 
+      "Pressable", 
+      "Swipeable", 
+      "Swipeables", 
+      "tapston" 
+    ], 
+    "terminal.integrated.defaultProfile.windows": "Git Bash", 
+    "vsicons.dontShowNewVersionMessage": true, 
+    "files.autoSave": "afterDelay", 
+    "workbench.colorTheme": "One Monokai", 
+    "editor.fontSize": 14, 
+    "editor.fontLigatures": true, 
+    "editor.fontFamily": "'Fira Code', 'Cascadia Code', 'JetBrains Mono'", 
+    "editor.guides.bracketPairs": true, 
+    "htmltagwrap.tag": "div", 
+    "editor.minimap.size": "fit", 
+    "[css]": { 
+      "editor.suggest.insertMode": "replace" 
+    }, 
+    "cSpell.languageSettings": [ 
+    ], 
+    "tabnine.experimentalAutoImports": true, 
+    "editor.minimap.showSlider": "always", 
+    "window.commandCenter": true, 
+    "remote.extensionKind": { 
+   
+      "pub.name": [ 
+        "ui" 
+      ] 
+    }, 
+    "remote.portsAttributes": { 
+     
+      "443": { 
+        "protocol": "https" 
+      }, 
+      "8443": { 
+        "protocol": "https" 
+      } 
+    }, 
+    "editor.minimap.enabled": false, 
+    "window.zoomLevel": 0, 
+  }

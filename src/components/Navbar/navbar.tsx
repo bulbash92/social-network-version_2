@@ -1,41 +1,38 @@
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import styles from './navbar.module.css';
 
-type isActiveType = {
-  isActive: boolean;
+type ActiveType = {
+  [key: string]: boolean;
 };
-
 const Navbar = () => {
+  const linkClassName = ({ isActive }: ActiveType) =>
+    isActive ? styles.active : styles.item;
   return (
     <nav className={styles.navbar}>
       <div className={styles.item}>
-        <Link
-          to='/profile'
-          className={styles.item}
-          
-        >
+        <NavLink to='/profile' className={linkClassName}>
           Profile
-        </Link>
+        </NavLink>
       </div>
       <div className={styles.item}>
-        <Link to='/dialogs' className={styles.item}>
+        <NavLink to='/dialogs' className={linkClassName}>
           Messages
-        </Link>
+        </NavLink>
       </div>
       <div className={styles.item}>
-        <Link to='/home' className={styles.item}>
+        <NavLink to='/users' className={linkClassName}>
           Users
-        </Link>
+        </NavLink>
       </div>
       <div className={styles.item}>
-        <Link to='/home' className={styles.item}>
+        <NavLink to='/news' className={linkClassName}>
           News
-        </Link>
+        </NavLink>
       </div>
       <div className={styles.item}>
-        <Link to='/home' className={styles.item}>
+        <NavLink to='/settings' className={linkClassName}>
           Music
-        </Link>
+        </NavLink>
       </div>
     </nav>
   );
