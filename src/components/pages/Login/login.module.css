@@ -1,0 +1,25 @@
+.login {
+  width: 100%;
+  padding: 20px;
+}
+
+.buttonLogin {
+  display: flex;
+  width: 20%;
+  height: 25px;
+  color: black;
+  background-color: none;
+  border: 1px solid green;
+  border-radius: 10px;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 40px;
+}
