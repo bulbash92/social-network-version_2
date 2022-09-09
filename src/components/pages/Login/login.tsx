@@ -5,15 +5,22 @@ import { Navigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../../hook';
 import { Auth } from '../../../services/auth/auth';
 import { login } from '../../../store/authSlice';
+import { Button } from '../../Button/button';
 // import { setUserData } from '../../../store/authSlice';
-import { Input } from '../../Input/input';
+import { InputForm } from '../../Input/input';
 import styles from './login.module.css';
+export type FormInputsType = {
+  email: string;
+  password: string;
+  rememberMe: boolean;
+  captcha: string;
+};
 
 export const Login = () => {
   const dispatch = useAppDispatch();
   const data = useAppSelector((state) => state.auth);
   const { isAuth, captchaUrl } = data!;
-  const {error, status} = useAppSelector(state => state.app)
+  const { error, status } = useAppSelector((state) => state.app);
   const {
     register,
     handleSubmit,
@@ -28,13 +35,6 @@ export const Login = () => {
     },
   });
 
-  type FormInputsType = {
-    email: string;
-    password: string;
-    rememberMe: boolean;
-    captcha: string;
-  };
-
   const onSubmit: SubmitHandler<FormInputsType> = (
     data: FormInputsType,
   ) => {
@@ -47,19 +47,20 @@ export const Login = () => {
   return (
     <div className={styles.login}>
       <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
-        <input
-          className={styles.input}
+        <InputForm
+          register={register}
+          type='email'
+          id='email'
           placeholder={'Email...'}
-          {...register('email')}
         />
         <div className={styles.textBlock}>
           {errors.email?.message}
         </div>
-        <input
+        <InputForm
+          register={register}
+          id='password'
           type={'password'}
           placeholder={'Password...'}
-          className={styles.input}
-          {...register('password')}
         />
         {captchaUrl ? (
           <div>
@@ -91,9 +92,12 @@ export const Login = () => {
           <input type={'checkbox'} {...register('rememberMe')} />
           Remember me
         </div>
-        
-          <button className={styles.buttonLogin} value={'Login'} type={'submit'} />
-        
+
+        <Button
+          disabled={status === 'loading'}
+          value={'Login'}
+          type={'submit'}
+        />
       </form>
     </div>
   );

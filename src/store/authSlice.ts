@@ -1,8 +1,4 @@
-import {
-  createAsyncThunk,
-  createSlice,
-  PayloadAction,
-} from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { Auth } from '../services/auth/auth';
 import { setAppError, setAppStatus } from './appSlice';
 
@@ -33,11 +29,6 @@ type InitStateType = {
   error: string | null;
   captchaUrl: string | null;
 };
-
-type AuthDataType = Pick<
-  InitStateType,
-  'id' | 'email' | 'login' | 'status' | 'isAuth'
->;
 
 export const fetchAuthUserData = createAsyncThunk(
   'auth/fetchAuthUserData',
@@ -141,11 +132,7 @@ const authSlice = createSlice({
       .addCase(fetchAuthUserData.fulfilled, (state, action) => {
         return { ...state, ...action.payload };
       });
-    // .addCase(uploadPhoto.fulfilled, (state, action) => {
-    //     state.authProfile!.photos = action.payload
-    // })
   },
 });
 
-// export const { setUserData, stopSubmit } = authSlice.actions;
 export default authSlice.reducer;
