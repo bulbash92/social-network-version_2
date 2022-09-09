@@ -23,6 +23,9 @@ export const Auth = {
       throw error;
     }
   },
+  captchaRequest() {
+    return instance.get<{ url: string }>('security/get-captcha-url');
+  },
 };
 
 export type LoginParamsType = {
