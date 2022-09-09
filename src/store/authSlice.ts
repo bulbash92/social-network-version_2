@@ -4,12 +4,13 @@ import {
   PayloadAction,
 } from '@reduxjs/toolkit';
 import { Auth } from '../services/auth/auth';
+import { setAppError, setAppStatus } from './appSlice';
 
 export type SubmitDataType = {
-  email: string,
-  password: string,
-  rememberMe: boolean,
-}
+  email: string;
+  password: string;
+  rememberMe: boolean;
+};
 
 const initialState: InitStateType = {
   id: null,
@@ -57,34 +58,61 @@ export const fetchAuthUserData = createAsyncThunk(
   },
 );
 
-export const login = createAsyncThunk('auth/login', async (data: SubmitDataType, {dispatch, rejectWithValue}) => {
-  // dispatch(setAppStatus('loading'))
-  try {
-      let res = await Auth.login(data)
+export const login = createAsyncThunk(
+  'auth/login',
+  async (data: SubmitDataType, { dispatch, rejectWithValue }) => {
+    dispatch(setAppStatus('loading'));
+    try {
+      let res = await Auth.login(data);
       if (res.data.resultCode === 0) {
-          await dispatch(fetchAuthUserData())
-          // dispatch(setAppError(null))
-          // dispatch(setAppStatus('succeeded'))
-          return ''
-      } 
-      //  if (res.resultCode === 10) {
-      //     // dispatch(setAppError(res.messages[0]))
-      //     let captchaRes = await Auth.captchaRequest()
-      //     // dispatch(setAppStatus('failed'))
-      //     return captchaRes.data.url
-      // } 
+        await dispatch(fetchAuthUserData());
+        dispatch(setAppError(null));
+        dispatch(setAppStatus('succeeded'));
+        return '';
+      }
+      if (res.data.resultCode === 10) {
+        dispatch(setAppError(res.data.messages[0]));
+        let captchaRes = await Auth.captchaRequest();
+        dispatch(setAppStatus('failed'));
+        return captchaRes.data.url;
+      }
 
-      //     if (res.messages.length > 0) dispatch(setAppError(res.messages[0]))
-      //     dispatch(setAppStatus('failed'))
-      //     return rejectWithValue({})
-      // }
-  } catch (e: any) {
-      // dispatch(setAppStatus('failed'))
-      // dispatch(setAppError(e.message))
-      return rejectWithValue({})
-  }
-})
+      if (res.data.messages.length > 0) {
+        dispatch(setAppError(res.data.messages[0]));
+        dispatch(setAppStatus('failed'));
+        return rejectWithValue({});
+      }
+    } catch (e: any) {
+      dispatch(setAppStatus('failed'));
+      dispatch(setAppError(e.message));
+      return rejectWithValue({});
+    }
+  },
+);
 
+export const logout = createAsyncThunk(
+  'auth/logout',
+  async (_, { dispatch, rejectWithValue }) => {
+    dispatch(setAppStatus('loading'));
+    try {
+      let res = await Auth.logout();
+      if (res.data.resultCode === 0) {
+        // dispatch(clearFriendsData())
+        // dispatch(changeFriendsCount(null))
+        dispatch(setAppStatus('succeeded'));
+        return { id: null, email: null, login: null, isAuth: false };
+      } else {
+        dispatch(setAppStatus('failed'));
+        dispatch(setAppError(res.data.messages[0]));
+        return rejectWithValue({});
+      }
+    } catch (e: any) {
+      dispatch(setAppStatus('failed'));
+      dispatch(setAppError(e.message));
+      return rejectWithValue({});
+    }
+  },
+);
 
 const authSlice = createSlice({
   name: 'auth',
@@ -92,23 +120,23 @@ const authSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
-      // .addCase(logout.fulfilled, (state) => {
-      //     return {
-      //         id: null,
-      //         isAuth: false,
-      //         error: null,
-      //         login: null,
-      //         status: null,
-      //         email: null,
-      //         authProfile: null,
-      //         captchaUrl: null,
-      //         remember: false
-      //     }
-      // })
+      .addCase(logout.fulfilled, (state) => {
+        return {
+          id: null,
+          isAuth: false,
+          error: null,
+          login: null,
+          status: null,
+          email: null,
+          authProfile: null,
+          captchaUrl: null,
+          remember: false,
+        };
+      })
       .addCase(login.fulfilled, (state, action) => {
-          if (action.payload) {
-              state.captchaUrl = action.payload
-          }
+        if (action.payload) {
+          state.captchaUrl = action.payload;
+        }
       })
       .addCase(fetchAuthUserData.fulfilled, (state, action) => {
         return { ...state, ...action.payload };

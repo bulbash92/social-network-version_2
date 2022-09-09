@@ -1,16 +1,19 @@
 import { Navigate, useNavigate } from 'react-router-dom';
-import { useAppSelector } from '../../hook';
+import { useAppDispatch, useAppSelector } from '../../hook';
+import { logout } from '../../store/authSlice';
 import styles from './header.module.css';
 import { User } from './userBlock/user';
 
 const Header = () => {
   const {isAuth, login} = useAppSelector(state => state.auth)
+  const dispatch = useAppDispatch()
   const navigate = useNavigate()
   const loginHandler = () => {
     navigate('/login')
   }
 
   const logoutHandler = () => {
+    dispatch(logout())
     navigate('/login')
   }
 
