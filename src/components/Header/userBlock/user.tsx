@@ -19,9 +19,9 @@ export const User: React.FC<UserProps> = ({
       <div className={styles.login}>
         {login} 
       </div>
-      <div>Logout</div>
+      <button className={styles.button} onClick={logout}>Logout</button>
     </div>
   ) : (
-    <div ><button onClick={onClickLogin} type="button">Login</button></div>
+    <button className={styles.button} onClick={onClickLogin} type="button">Login</button>
   );
 };

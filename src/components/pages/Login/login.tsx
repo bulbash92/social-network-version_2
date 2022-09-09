@@ -13,7 +13,7 @@ export const Login = () => {
   const dispatch = useAppDispatch();
   const data = useAppSelector((state) => state.auth);
   const { isAuth, captchaUrl } = data!;
-  // const {error, status} = useAppSelector(state => state.app)
+  const {error, status} = useAppSelector(state => state.app)
   const {
     register,
     handleSubmit,
@@ -61,7 +61,7 @@ export const Login = () => {
           className={styles.input}
           {...register('password')}
         />
-        {/* {captchaUrl ? (
+        {captchaUrl ? (
           <div>
             <img src={captchaUrl} alt={'captcha'} />
             <div>
@@ -86,7 +86,7 @@ export const Login = () => {
           <div className={styles.textBlock}>
             {errors.password?.message}
           </div>
-        )} */}
+        )}
         <div>
           <input type={'checkbox'} {...register('rememberMe')} />
           Remember me
