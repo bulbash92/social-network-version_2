@@ -11,3 +11,12 @@
 .login {
     border-bottom: 2px solid white;
 }
+
+.button {
+    outline: none;
+    background-color: transparent;
+    border: none;
+    color: white;
+    cursor: pointer;
+    font-size: 16px;
+}
