@@ -10,7 +10,7 @@ const Navbar = () => {
   return (
     <nav className={styles.navbar}>
       <div className={styles.item}>
-        <NavLink to='/profile' className={linkClassName}>
+        <NavLink to='/' className={linkClassName}>
           Profile
         </NavLink>
       </div>
