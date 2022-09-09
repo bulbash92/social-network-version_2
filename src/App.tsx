@@ -14,7 +14,7 @@ function App() {
       <div className='App-content'>
         <Navbar />
         <Routes>
-          <Route path='/profile' element={<Profile />} />
+          <Route path='/' element={<Profile />} />
           <Route path='/dialogs' element={<Messages />} />
           <Route path='/users' element={<Users />} />
           <Route path='/news' element={'News'} />
