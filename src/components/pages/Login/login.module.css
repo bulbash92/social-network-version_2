@@ -23,3 +23,20 @@
   align-items: center;
   margin-top: 40px;
 }
+
+.input {
+  display: block;
+  width: 250px;
+  padding: 5px;
+  align-items: center;
+  border: none;
+  border-bottom: 1px solid grey;
+  margin: 5px;
+  outline: none;
+}
+
+
+.textBlock {
+  width: 200px;
+  border: 2px solid red,
+}
