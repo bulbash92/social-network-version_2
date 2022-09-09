@@ -1,3 +1,4 @@
+import React, {useEffect} from 'react'
 import { Route, Routes } from 'react-router-dom';
 import './App.css';
 import Header from './components/Header/header';
@@ -6,8 +7,16 @@ import { Login } from './components/pages/Login/login';
 import { Messages } from './components/pages/Messages/messages';
 import Profile from './components/pages/Profile/profile';
 import { Users } from './components/pages/Users/users';
+import { useAppDispatch, useAppSelector } from './hook';
+import { initializeApp } from './store/appSlice';
 
 function App() {
+  const dispatch = useAppDispatch();
+  const {initialized, status} = useAppSelector(state => state.app)
+
+  useEffect(() => {
+    dispatch(initializeApp())
+  }, [])
   return (
     <div className='App'>
       <Header />
