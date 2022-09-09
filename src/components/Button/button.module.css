@@ -1,0 +1,33 @@
+.buttonPrimary {
+  display: flex;
+  width: 200px;
+  height: 30px;
+  color: white;
+  background-color: #EE0045;
+  border: none;
+  border-radius: 32px;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  cursor: pointer;
+}
+
+.buttonSecondary {
+    display: flex;
+    width: 200px;
+    height: 30px;
+    color: black;
+    background-color: #EBEFF2;
+    border: none;
+    border-radius: 32px;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    cursor: pointer;
+}
+
+.buttonPrimary:hover {
+    background-color: #B22222;
+}
